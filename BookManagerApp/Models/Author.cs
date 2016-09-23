@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BookManagerApp.Models
 {
-    public class Category
+    public class Author
     {
         public int Id { get; set; }
 
