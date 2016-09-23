@@ -22,5 +22,7 @@ namespace BookManagerApp.Models
         public System.Data.Entity.DbSet<BookManagerApp.Models.Book> Books { get; set; }
 
         public System.Data.Entity.DbSet<BookManagerApp.Models.Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<BookManagerApp.Models.Author> Authors { get; set; }
     }
 }
