@@ -20,7 +20,17 @@ namespace BookManagerApp.Controllers
         // GET: api/Books
         public IQueryable<Book> GetBooks()
         {
-            return db.Books;
+            return db.Books.OrderBy(b => b.Title);
+        }
+
+        public IQueryable<Book> GetBooksByCategory(string category)
+        {
+            return db.Books.Where(b => string.Equals(category, b.Category.Name)).OrderBy(b => b.Title);
+        }
+
+        public IQueryable<Book> GetBooksByAuthors(string author)
+        {
+            return db.Books.Where(b => string.Equals(author, b.Author.Name)).OrderBy(b => b.Title);
         }
 
         // GET: api/Books/5
