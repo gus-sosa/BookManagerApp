@@ -11,116 +11,107 @@ using BookManagerApp.Models;
 
 namespace BookManagerApp.Controllers
 {
-    public class HomeController : Controller
+    public class CategoriesController : Controller
     {
         private BookManagerAppContext db = new BookManagerAppContext();
 
-        // GET: Home
+        // GET: Categories
         public async Task<ActionResult> Index()
         {
-            var books = db.Books.Include(b => b.Author).Include(b => b.Category).OrderBy(b=>b.Author.Name);
-            return View(await books.ToListAsync());
+            return View(await db.Categories.ToListAsync());
         }
 
-        // GET: Home/Details/5
+        // GET: Categories/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
-            if (book == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(category);
         }
 
-        // GET: Home/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name");
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             return View();
         }
 
-        // POST: Home/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,AuthorId,CategoryId")] Book book)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
+                db.Categories.Add(category);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name", book.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", book.CategoryId);
-            return View(book);
+            return View(category);
         }
 
-        // GET: Home/Edit/5
+        // GET: Categories/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
-            if (book == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name", book.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", book.CategoryId);
-            return View(book);
+            return View(category);
         }
 
-        // POST: Home/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,AuthorId,CategoryId")] Book book)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name", book.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", book.CategoryId);
-            return View(book);
+            return View(category);
         }
 
-        // GET: Home/Delete/5
+        // GET: Categories/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
-            if (book == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(category);
         }
 
-        // POST: Home/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Book book = await db.Books.FindAsync(id);
-            db.Books.Remove(book);
+            Category category = await db.Categories.FindAsync(id);
+            db.Categories.Remove(category);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

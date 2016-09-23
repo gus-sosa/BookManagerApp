@@ -19,22 +19,19 @@
                 </button>
                 @Html.ActionLink("BookManager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @*<div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("By Author", "Index", "Home")</li>
-                    <li>@Html.ActionLink("By Category", "ListBooks", "Home")</li>
-                    <li>@Html.ActionLink("By ", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Authors", "Index", "Authors")</li>
+                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
-            </div>*@
+            </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BookManager Application</p>
         </footer>
     </div>
 
