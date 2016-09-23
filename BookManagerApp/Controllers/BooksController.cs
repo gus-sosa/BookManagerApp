@@ -31,7 +31,7 @@ namespace BookManagerApp.Controllers
         }
 
         [HttpGet]
-        [Route("api/books/booksbyauthor/{category}")]
+        [Route("api/books/booksbyauthor/{author}")]
         public IQueryable<Book> GetBooksByAuthor(string author)
         {
             return db.Books.Where(b => string.Equals(author, b.Author.Name)).OrderBy(b => b.Title);
