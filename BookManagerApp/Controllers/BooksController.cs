@@ -23,12 +23,16 @@ namespace BookManagerApp.Controllers
             return db.Books.OrderBy(b => b.Title);
         }
 
+        [HttpGet]
+        [Route("api/books/booksbycategory/{category}")]
         public IQueryable<Book> GetBooksByCategory(string category)
         {
             return db.Books.Where(b => string.Equals(category, b.Category.Name)).OrderBy(b => b.Title);
         }
 
-        public IQueryable<Book> GetBooksByAuthors(string author)
+        [HttpGet]
+        [Route("api/books/booksbyauthor/{category}")]
+        public IQueryable<Book> GetBooksByAuthor(string author)
         {
             return db.Books.Where(b => string.Equals(author, b.Author.Name)).OrderBy(b => b.Title);
         }

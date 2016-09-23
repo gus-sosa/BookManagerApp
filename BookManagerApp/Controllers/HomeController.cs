@@ -18,7 +18,7 @@ namespace BookManagerApp.Controllers
         // GET: Home
         public async Task<ActionResult> Index()
         {
-            var books = db.Books.Include(b => b.Author).Include(b => b.Category);
+            var books = db.Books.Include(b => b.Author).Include(b => b.Category).OrderBy(b=>b.Author.Name);
             return View(await books.ToListAsync());
         }
 
